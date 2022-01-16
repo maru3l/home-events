@@ -14,38 +14,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get('/driveway/motion', (req, res) => {
-  try {
-    if (req.query.message === 'ON') {
-      publish('home/driveway/camera/motion', 'ON');
-    }
+app.get('/:id/motion', (req, res) => {
+  const topic = `home/${req.params.id}/camera/motion`;
 
-    if (req.query.message === 'OFF') {
-      publish('home/driveway/camera/motion', 'OFF');
-    }
+  if (!['ON', 'OFF'].includes(req.query.Message)) throw new Error('Invalid Message');
+
+  const message = req.query.Message;
+
+  try {
+    publish(topic, message);
 
     res.json({ response: 'OK' });
   } catch (error) {
     console.error(error);
 
-    logger.error(error);
-
-    res.status(500).json({ error });
-  }
-});
-
-app.get('/front_yard/motion/on', (req, res) => {
-  try {
-    if (req.query.message === 'ON') {
-      publish('home/front_yard/camera/motion', 'ON');
-    }
-
-    if (req.query.message === 'OFF') {
-      publish('home/front_yard/camera/motion', 'OFF');
-    }
-
-    res.json({ response: 'OK' });
-  } catch (error) {
     logger.error(error);
 
     res.status(500).json({ error });
