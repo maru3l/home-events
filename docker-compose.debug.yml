@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  nginx:
+    ports:
+      - 3000:80
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: build
+    environment:
+      NODE_ENV: development
+    ports:
+      - 9229:9229
+    volumes:
+      - ./:/app:ro
+      - /app/node_modules
+    command: ["npm", "start"]

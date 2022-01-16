@@ -1,0 +1,31 @@
+{
+  "name": "home-events",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon --watch ./src --exec npm run dev -- ./src/bin/www",
+    "build": "babel src -d dist",
+    "clean": "rm -rf node_modules && rm -rf dist",
+    "dev": "babel-node --inspect=0.0.0.0:9229 -r dotenv/config"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^11.0.0",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "mqtt": "^4.3.4",
+    "winston": "^3.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "babel-preset-airbnb": "^5.0.0",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "nodemon": "^2.0.15"
+  }
+}
