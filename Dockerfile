@@ -17,8 +17,6 @@ RUN npm run build
 # This build takes the production build from staging build
 FROM node:lts-alpine
 
-USER node
-
 ENV PORT 3000
 ENV NODE_ENV production
 
@@ -37,5 +35,7 @@ COPY --chown=node:node --from=build /app/dist ./dist
 COPY --chown=node:node config ./config
 
 EXPOSE ${PORT}
+
+USER node
 
 CMD ["node", "dist/bin/www"]
